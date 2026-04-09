@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sparkfish Inc. — E-Commerce Operator</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#333;background:#fff}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+
+nav{display:flex;align-items:center;justify-content:space-between;padding:18px 60px;background:#fff;border-bottom:1px solid rgba(43,191,191,0.2);position:sticky;top:0;z-index:100}
+.logo-text{font-size:24px;font-weight:700;cursor:pointer;line-height:1}
+.logo-text .spark{color:#2BBFBF}
+.logo-text .fish{color:#666}
+.nav-links{display:flex;gap:32px;align-items:center}
+.nav-links a{font-size:14px;color:#555;transition:color 0.2s}
+.nav-links a:hover{color:#2BBFBF}
+.nav-cta{background:#2BBFBF;color:#fff!important;padding:10px 22px;border-radius:4px;font-weight:500}
+.nav-cta:hover{background:#1a9e9e!important}
+
+.hero{background:linear-gradient(135deg,#0d4a4a 0%,#1a6363 55%,#1e7a7a 100%);padding:80px 60px;display:flex;align-items:center;gap:60px}
+.hero-text{flex:1;max-width:560px}
+.hero-eyebrow{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#7de8e8;margin-bottom:16px}
+.hero h1{font-size:46px;font-weight:600;color:#fff;line-height:1.12;margin-bottom:20px}
+.hero h1 span{color:#7de8e8}
+.hero-sub{font-size:16px;color:rgba(255,255,255,0.8);line-height:1.7;margin-bottom:32px}
+.hero-btns{display:flex;flex-direction:row;gap:12px;align-items:center}
+.btn-primary{background:#2BBFBF;color:#fff;border:none;padding:13px 28px;border-radius:4px;font-size:15px;font-weight:500;cursor:pointer;display:inline-block;white-space:nowrap}
+.btn-primary:hover{background:#1a9e9e}
+.btn-outline{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,0.45);padding:13px 28px;border-radius:4px;font-size:15px;cursor:pointer;display:inline-block;white-space:nowrap}
+.btn-outline:hover{border-color:#fff}
+.hero-card{flex:0 0 300px;background:rgba(255,255,255,0.07);border:0.5px solid rgba(255,255,255,0.18);border-radius:14px;padding:32px 36px}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.stat-num{font-size:34px;font-weight:600;color:#7de8e8;line-height:1}
+.stat-label{font-size:12px;color:rgba(255,255,255,0.6);margin-top:6px}
+.stat-divider{grid-column:1/-1;border-top:0.5px solid rgba(255,255,255,0.15);padding-top:24px;text-align:center}
+
+section{padding:80px 60px}
+.section-label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#2BBFBF;margin-bottom:12px}
+.section-h2{font-size:36px;font-weight:600;color:#1a6363;margin-bottom:16px;line-height:1.2}
+.section-sub{font-size:16px;color:#666;line-height:1.75;max-width:580px;margin-bottom:52px}
+
+.brands-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.brand-card{border:0.5px solid rgba(43,191,191,0.3);border-radius:14px;padding:32px 24px;background:#fff;transition:box-shadow 0.2s,transform 0.2s;cursor:pointer}
+.brand-card:hover{box-shadow:0 8px 32px rgba(43,191,191,0.15);transform:translateY(-2px)}
+.brand-name{font-size:17px;font-weight:600;color:#1a6363;margin-bottom:6px}
+.brand-url{font-size:12px;color:#2BBFBF;margin-bottom:12px}
+.brand-desc{font-size:14px;color:#666;line-height:1.6}
+
+.why-section{background:#f4fafa}
+.why-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.why-card{background:#fff;border:0.5px solid rgba(43,191,191,0.25);border-radius:14px;padding:32px;display:flex;gap:20px}
+.why-num{font-size:36px;font-weight:700;color:#d0f0f0;flex-shrink:0;line-height:1}
+.why-title{font-size:16px;font-weight:600;color:#1a6363;margin-bottom:10px}
+.why-body{font-size:14px;color:#666;line-height:1.7}
+
+.facility-section{display:flex;gap:60px;align-items:center}
+.facility-img{flex:0 0 480px;height:320px;border-radius:14px;overflow:hidden;border:0.5px solid rgba(43,191,191,0.2)}
+.facility-img img{width:100%;height:100%;object-fit:cover}
+.facility-text p{font-size:16px;color:#555;line-height:1.75;margin-bottom:18px}
+.pill{display:inline-block;background:#e1f5f5;color:#1a6363;font-size:12px;font-weight:500;padding:7px 16px;border-radius:20px;margin:4px 4px 4px 0}
+
+.cta-banner{background:#1a6363;text-align:center;padding:90px 60px}
+.cta-banner h2{font-size:38px;font-weight:600;color:#fff;margin-bottom:18px}
+.cta-banner p{font-size:17px;color:rgba(255,255,255,0.75);margin-bottom:40px;max-width:520px;margin-left:auto;margin-right:auto;line-height:1.7}
+
+footer{background:#0d4a4a;padding:40px 60px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px}
+.footer-logo-text{font-size:20px;font-weight:700}
+.footer-logo-text .spark{color:#7de8e8}
+.footer-logo-text .fish{color:rgba(255,255,255,0.5)}
+.footer-copy{font-size:13px;color:rgba(255,255,255,0.4)}
+.footer-links{display:flex;gap:28px}
+.footer-links a{font-size:13px;color:rgba(255,255,255,0.5);transition:color 0.2s}
+.footer-links a:hover{color:#7de8e8}
+.footer-social a{font-size:13px;color:rgba(255,255,255,0.5);margin-left:16px;transition:color 0.2s}
+.footer-social a:hover{color:#7de8e8}
+
+.page-hero{background:linear-gradient(135deg,#0d4a4a,#1a6363);padding:72px 60px;text-align:center}
+.page-hero h1{font-size:44px;font-weight:600;color:#fff;margin-bottom:16px}
+.page-hero p{font-size:18px;color:rgba(255,255,255,0.75);max-width:560px;margin:0 auto;line-height:1.7}
+
+.brand-detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px}
+.brand-detail-card{border:0.5px solid rgba(43,191,191,0.3);border-radius:14px;overflow:hidden}
+.brand-detail-header{background:#e1f5f5;padding:28px 32px}
+.brand-detail-name{font-size:20px;font-weight:600;color:#1a6363;margin-bottom:4px}
+.brand-detail-url{font-size:13px;color:#2BBFBF}
+.brand-detail-body{padding:28px 32px}
+.brand-detail-body p{font-size:15px;color:#555;line-height:1.75;margin-bottom:16px}
+.construction-badge{display:inline-flex;align-items:center;gap:8px;background:#fff8e1;border:0.5px solid #f0c040;border-radius:6px;padding:10px 16px;font-size:13px;color:#8a6d00;margin-top:8px}
+.visit-btn{display:inline-block;background:#2BBFBF;color:#fff;padding:10px 22px;border-radius:4px;font-size:14px;font-weight:500;margin-top:12px;transition:background 0.2s}
+.visit-btn:hover{background:#1a9e9e}
+
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.about-text p{font-size:16px;color:#555;line-height:1.8;margin-bottom:20px}
+.values-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:32px}
+.value-card{background:#f4fafa;border-radius:10px;padding:20px;border-left:3px solid #2BBFBF}
+.value-title{font-size:14px;font-weight:600;color:#1a6363;margin-bottom:6px}
+.value-body{font-size:13px;color:#666;line-height:1.6}
+
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.contact-info h3{font-size:22px;font-weight:600;color:#1a6363;margin-bottom:24px}
+.contact-item{display:flex;gap:16px;margin-bottom:28px;align-items:flex-start}
+.contact-icon{width:40px;height:40px;background:#e1f5f5;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px}
+.contact-label{font-size:12px;color:#999;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.contact-val{font-size:15px;color:#333;line-height:1.5}
+.contact-val a{color:#2BBFBF}
+
+.page{display:none}
+.page.active{display:block}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo-text" onclick="showPage('home')"><span class="spark">Spark</span><span class="fish">fish</span></div>
+  <div class="nav-links">
+    <a href="#" onclick="showPage('home')">Home</a>
+    <a href="#" onclick="showPage('brands')">Our brands</a>
+    <a href="#" onclick="showPage('whatwesell')">What we sell</a>
+    <a href="#" onclick="showPage('about')">About</a>
+    <a href="#" onclick="showPage('contact')" class="nav-cta">Work with us</a>
+  </div>
+</nav>
+
+<!-- ═══ HOME ═══ -->
+<div id="page-home" class="page active">
+  <div class="hero">
+    <div class="hero-text">
+      <div class="hero-eyebrow">E-commerce operator</div>
+      <h1>Your products.<br><span>The right storefront.</span><br>The right buyers.</h1>
+      <p class="hero-sub">Sparkfish is a family-owned e-commerce operator that partners with manufacturers and distributors to put great products in front of the customers who want them most.</p>
+      <div class="hero-btns">
+        <a href="#" onclick="showPage('contact')" class="btn-primary">Work with us</a>
+        <a href="#" onclick="showPage('brands')" class="btn-outline">Our brands</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="stat-grid">
+        <div><div class="stat-num">6</div><div class="stat-label">Category brands</div></div>
+        <div><div class="stat-num">30+</div><div class="stat-label">Years in retail</div></div>
+        <div><div class="stat-num">1,000+</div><div class="stat-label">Brand offerings</div></div>
+        <div><div class="stat-num" style="font-size:16px;padding-top:4px">Lehi, Utah</div><div class="stat-label">Retail · Warehouse · Shipping</div></div>
+      </div>
+    </div>
+  </div>
+
+  <section>
+    <div class="section-label">Our brands</div>
+    <h2 class="section-h2">A storefront built for every category</h2>
+    <p class="section-sub">We operate a growing network of vertical-specific e-commerce brands, each designed to serve a distinct customer base with focused product selection and genuine category expertise.</p>
+    <div class="brands-grid">
+      <div class="brand-card" onclick="showPage('brands')">
+        <div class="brand-name">Iron Range Outdoor</div>
+        <div class="brand-url">ironrangeoutdoor.com</div>
+        <div class="brand-desc">Sports, outdoor, and tactical gear for the serious enthusiast.</div>
+      </div>
+      <div class="brand-card" onclick="showPage('brands')">
+        <div class="brand-name">Zion Ridge Auto</div>
+        <div class="brand-url">zionridgeauto.com</div>
+        <div class="brand-desc">Automotive parts, accessories, and gear for drivers and enthusiasts.</div>
+      </div>
+      <div class="brand-card" onclick="showPage('brands')">
+        <div class="brand-name">Clover Run Co.</div>
+        <div class="brand-url">cloverrunco.com</div>
+        <div class="brand-desc">Quality gear and products for children, youth, and active families.</div>
+      </div>
+      <div class="brand-card" onclick="showPage('brands')">
+        <div class="brand-name">Red Tail Pets</div>
+        <div class="brand-url">redtailpets.com</div>
+        <div class="brand-desc">Pet supplies and accessories for owners who take their pets seriously.</div>
+      </div>
+      <div class="brand-card" onclick="showPage('brands')">
+        <div class="brand-name">Copper Line Home</div>
+        <div class="brand-url">copperlinehome.com</div>
+        <div class="brand-desc">Home goods, hardware, and appliances for every room and project.</div>
+      </div>
+      <div class="brand-card" onclick="showPage('brands')">
+        <div class="brand-name">Ashwell Goods</div>
+        <div class="brand-url">ashwellgoods.com</div>
+        <div class="brand-desc">Health, beauty, and wellness products curated for quality and results.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="why-section">
+    <div class="section-label">Why Sparkfish</div>
+    <h2 class="section-h2">Multi-channel retail, built from the ground up</h2>
+    <p class="section-sub">From our own branded storefronts to national marketplaces and a physical retail location — we find the right customers for the right products across every channel.</p>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-num">01</div>
+        <div>
+          <div class="why-title">From storefront to doorstep</div>
+          <div class="why-body">We sell across every channel — our own branded storefronts, national marketplaces, and our physical retail location in Lehi, Utah. Wherever your customer is shopping, we're there to meet them.</div>
+        </div>
+      </div>
+      <div class="why-card">
+        <div class="why-num">02</div>
+        <div>
+          <div class="why-title">30+ years of retail expertise</div>
+          <div class="why-body">From brick and mortar to e-commerce, we understand how product moves across every channel. That experience informs every buying decision we make.</div>
+        </div>
+      </div>
+      <div class="why-card">
+        <div class="why-num">03</div>
+        <div>
+          <div class="why-title">Real operational infrastructure</div>
+          <div class="why-body">Our Lehi, Utah facility combines retail, warehousing, and shipping under one roof. We're a real business built for the long haul — not a bedroom operation.</div>
+        </div>
+      </div>
+      <div class="why-card">
+        <div class="why-num">04</div>
+        <div>
+          <div class="why-title">Category-focused storefronts</div>
+          <div class="why-body">Your products belong in the right context. Our dedicated vertical brands put them in front of buyers who came looking specifically for what you make.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-label">Our facility</div>
+    <h2 class="section-h2">Built for real retail operations</h2>
+    <div class="facility-section">
+      <div class="facility-img">
+        <img src="storefront.jpg" alt="Sparkfish facility in Lehi, Utah" onerror="this.parentElement.style.background='#e1f5f5';this.style.display='none'"/>
+      </div>
+      <div class="facility-text">
+        <p>Our Lehi, Utah location is the operational heart of Sparkfish — a fully functioning flex space combining retail, warehousing, and shipping capabilities under one roof.</p>
+        <p>It's the physical proof that we're a real business, with real infrastructure, built to move product consistently and reliably. When you work with Sparkfish, you're working with an operation that has been serving customers face to face for decades.</p>
+        <div style="margin-top:24px">
+          <span class="pill">Retail storefront</span>
+          <span class="pill">Warehousing</span>
+          <span class="pill">Shipping & fulfillment</span>
+          <span class="pill">Lehi, Utah</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-banner">
+    <h2>Ready to put your products in the right hands?</h2>
+    <p>We're always looking for quality manufacturers and distributors to partner with. If you make great product, let's talk.</p>
+    <a href="#" onclick="showPage('contact')" class="btn-primary" style="font-size:16px;padding:16px 40px">Get in touch</a>
+  </div>
+
+  <footer>
+    <div class="footer-logo-text"><span class="spark">Spark</span><span class="fish">fish</span></div>
+    <div class="footer-copy">© 2026 Sparkfish Inc. — Lehi, Utah</div>
+    <div class="footer-links">
+      <a href="#" onclick="showPage('brands')">Our brands</a>
+      <a href="#" onclick="showPage('about')">About</a>
+      <a href="#" onclick="showPage('contact')">Contact</a>
+    </div>
+    <div class="footer-social">
+      <a href="https://www.facebook.com/sparkfishinc" target="_blank">Facebook</a>
+      <a href="https://www.instagram.com/sparkfish_lehi/" target="_blank">Instagram</a>
+    </div>
+  </footer>
+</div>
+
+<!-- ═══ BRANDS ═══ -->
+<div id="page-brands" class="page">
+  <div class="page-hero">
+    <h1>Our brands</h1>
+    <p>Each Sparkfish brand is purpose-built for its vertical — dedicated storefronts, focused product selection, and customers who came looking specifically for what you make.</p>
+  </div>
+
+  <section>
+    <div class="brand-detail-grid">
+
+      <div class="brand-detail-card">
+        <div class="brand-detail-header">
+          <div class="brand-detail-name">Iron Range Outdoor</div>
+          <div class="brand-detail-url">ironrangeoutdoor.com</div>
+        </div>
+        <div class="brand-detail-body">
+          <p>Iron Range Outdoor is our destination for the serious sports and outdoor enthusiast. From hunting, fishing, and hiking to tactical gear and survival equipment, we've curated a product line built for people who demand performance from their gear.</p>
+          <p>We partner with brands that stand behind their products — companies that build for the field, not just the shelf. Our customers know the difference, and so do we.</p>
+          <a href="https://www.ironrangeoutdoor.com" target="_blank" class="visit-btn">Visit storefront →</a>
+        </div>
+      </div>
+
+      <div class="brand-detail-card">
+        <div class="brand-detail-header">
+          <div class="brand-detail-name">Zion Ridge Auto</div>
+          <div class="brand-detail-url">zionridgeauto.com</div>
+        </div>
+        <div class="brand-detail-body">
+          <p>Zion Ridge Auto serves drivers, enthusiasts, and everyday vehicle owners looking for quality automotive parts and accessories. We've built a curated selection that covers everything from maintenance essentials to performance upgrades.</p>
+          <p>We work with manufacturers who produce parts that perform — not just parts that fit. Every product in our lineup is chosen with reliability and value in mind.</p>
+          <div class="construction-badge">🚧 New storefront coming soon</div>
+        </div>
+      </div>
+
+      <div class="brand-detail-card">
+        <div class="brand-detail-header">
+          <div class="brand-detail-name">Clover Run Co.</div>
+          <div class="brand-detail-url">cloverrunco.com</div>
+        </div>
+        <div class="brand-detail-body">
+          <p>Clover Run Co. is built for families who want quality products for the children and young people in their lives. From outdoor play and youth sports to educational tools and everyday essentials, we curate products that parents can trust.</p>
+          <p>We partner with brands that share our commitment to safety, durability, and value — because parents research carefully and deserve a source they can rely on.</p>
+          <div class="construction-badge">🚧 New storefront coming soon</div>
+        </div>
+      </div>
+
+      <div class="brand-detail-card">
+        <div class="brand-detail-header">
+          <div class="brand-detail-name">Red Tail Pets</div>
+          <div class="brand-detail-url">redtailpets.com</div>
+        </div>
+        <div class="brand-detail-body">
+          <p>Red Tail Pets is a destination for pet owners who take their animals as seriously as we do. We've built a carefully selected lineup of supplies, accessories, and care products across dogs, cats, birds, and more.</p>
+          <p>Pet owners are passionate, loyal buyers. We partner with brands that earn that loyalty — products built with real quality that pet owners come back for again and again.</p>
+          <div class="construction-badge">🚧 New storefront coming soon</div>
+        </div>
+      </div>
+
+      <div class="brand-detail-card">
+        <div class="brand-detail-header">
+          <div class="brand-detail-name">Copper Line Home</div>
+          <div class="brand-detail-url">copperlinehome.com</div>
+        </div>
+        <div class="brand-detail-body">
+          <p>Copper Line Home covers the full spectrum of home goods, hardware, and appliances — from everyday household essentials to the tools and upgrades that make a house work better.</p>
+          <p>We source from manufacturers who build products that last. No filler, no throwaway items — just solid product lines that homeowners can depend on.</p>
+          <div class="construction-badge">🚧 New storefront coming soon</div>
+        </div>
+      </div>
+
+      <div class="brand-detail-card">
+        <div class="brand-detail-header">
+          <div class="brand-detail-name">Ashwell Goods</div>
+          <div class="brand-detail-url">ashwellgoods.com</div>
+        </div>
+        <div class="brand-detail-body">
+          <p>Ashwell Goods is our health, beauty, and wellness storefront — a curated destination for customers who care about what they put in and on their bodies. We've built a product lineup grounded in quality ingredients, proven results, and brands that stand behind their formulas.</p>
+          <p>In a category full of noise, we cut through by partnering only with manufacturers whose products we'd use ourselves.</p>
+          <div class="construction-badge">🚧 New storefront coming soon</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="cta-banner">
+    <h2>Make a product that fits one of our verticals?</h2>
+    <p>We're actively sourcing quality products across all of our categories. Reach out and let's talk.</p>
+    <a href="#" onclick="showPage('contact')" class="btn-primary" style="font-size:16px;padding:16px 40px">Contact us</a>
+  </div>
+
+  <footer>
+    <div class="footer-logo-text"><span class="spark">Spark</span><span class="fish">fish</span></div>
+    <div class="footer-copy">© 2026 Sparkfish Inc. — Lehi, Utah</div>
+    <div class="footer-links">
+      <a href="#" onclick="showPage('home')">Home</a>
+      <a href="#" onclick="showPage('about')">About</a>
+      <a href="#" onclick="showPage('contact')">Contact</a>
+    </div>
+    <div class="footer-social">
+      <a href="https://www.facebook.com/sparkfishinc" target="_blank">Facebook</a>
+      <a href="https://www.instagram.com/sparkfish_lehi/" target="_blank">Instagram</a>
+    </div>
+  </footer>
+</div>
+
+<!-- ═══ WHAT WE SELL ═══ -->
+<div id="page-whatwesell" class="page">
+  <div class="page-hero">
+    <h1>What we sell</h1>
+    <p>We carry hundreds of brands across our verticals. Search below or browse the full catalog alphabetically.</p>
+  </div>
+
+  <section>
+    <div style="max-width:520px;margin:0 auto 48px;">
+      <input id="brand-search" type="text" placeholder="Search brands..." oninput="filterBrands()" style="width:100%;padding:14px 20px;font-size:16px;border:1.5px solid rgba(43,191,191,0.4);border-radius:8px;outline:none;color:#333;"/>
+      <div id="search-count" style="text-align:center;margin-top:12px;font-size:13px;color:#999;"></div>
+    </div>
+
+    <div id="az-nav" style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:40px;"></div>
+
+    <div id="brand-list"></div>
+  </section>
+
+  <footer>
+    <div class="footer-logo-text"><span class="spark">Spark</span><span class="fish">fish</span></div>
+    <div class="footer-copy">© 2026 Sparkfish Inc. — Lehi, Utah</div>
+    <div class="footer-links">
+      <a href="#" onclick="showPage('home')">Home</a>
+      <a href="#" onclick="showPage('brands')">Our brands</a>
+      <a href="#" onclick="showPage('contact')">Contact</a>
+    </div>
+    <div class="footer-social">
+      <a href="https://www.facebook.com/sparkfishinc" target="_blank">Facebook</a>
+      <a href="https://www.instagram.com/sparkfish_lehi/" target="_blank">Instagram</a>
+    </div>
+  </footer>
+</div>
+
+<!-- ═══ ABOUT ═══ -->
+<div id="page-about" class="page">
+  <div class="page-hero">
+    <h1>About Sparkfish</h1>
+    <p>Real retail experience. Real infrastructure. Real commitment to the brands we partner with.</p>
+  </div>
+
+  <section>
+    <div class="about-grid">
+      <div class="about-text">
+        <div class="section-label">Our story</div>
+        <h2 class="section-h2">30+ years of retail, built into everything we do</h2>
+        <p>Sparkfish is a family-owned and operated e-commerce company based in Lehi, Utah. Our roots in retail go back more than three decades — spanning brick and mortar storefronts and the full evolution of e-commerce — giving us a depth of experience that purely digital businesses simply don't have.</p>
+        <p>We built Sparkfish on a straightforward belief: that great selling starts with great product, and great product comes from manufacturers and distributors who stand behind what they make. Our job is to find those companies, buy their product, and put it in front of the right customers through the right storefronts.</p>
+        <p>Our family values drive everything we do. We want to find the best deal on the best product and deliver the best customer experience we can. We work hard to present our customers with as many opportunities and unique product lines as possible — partnering with quality brands from across the country to bring products that companies genuinely stand behind.</p>
+      </div>
+      <div>
+        <div class="facility-img" style="height:360px;margin-bottom:32px">
+          <img src="storefront.jpg" alt="Sparkfish facility in Lehi, Utah" onerror="this.parentElement.style.background='#e1f5f5';this.style.display='none'"/>
+        </div>
+        <div class="values-grid">
+          <div class="value-card">
+            <div class="value-title">Family owned & operated</div>
+            <div class="value-body">Every decision is made by people who have skin in the game and a long-term view.</div>
+          </div>
+          <div class="value-card">
+            <div class="value-title">Quality over quantity</div>
+            <div class="value-body">We curate — we don't just collect. Every product line we carry is chosen with intention.</div>
+          </div>
+          <div class="value-card">
+            <div class="value-title">Brands we believe in</div>
+            <div class="value-body">We partner with manufacturers whose products we'd stand behind ourselves.</div>
+          </div>
+          <div class="value-card">
+            <div class="value-title">Customer first</div>
+            <div class="value-body">The end customer experience drives every sourcing and operational decision we make.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="why-section">
+    <div class="section-label">Our facility</div>
+    <h2 class="section-h2">Lehi, Utah — our operational home</h2>
+    <p class="section-sub">Our Lehi location is a brick and mortar retail hub first — a place where customers walk in and buy product off the shelf. Behind that storefront sits a fully functioning warehouse and shipping operation, making it the physical backbone of everything we do across every channel.</p>
+    <div style="display:flex;gap:16px;flex-wrap:wrap">
+      <span class="pill" style="font-size:14px;padding:10px 20px">📍 520 S. 850 E., Suite B7, Lehi, UT 84043</span>
+      <span class="pill" style="font-size:14px;padding:10px 20px">Retail storefront</span>
+      <span class="pill" style="font-size:14px;padding:10px 20px">Warehousing</span>
+      <span class="pill" style="font-size:14px;padding:10px 20px">Shipping & fulfillment</span>
+    </div>
+  </section>
+
+  <div class="cta-banner">
+    <h2>Let's build something together</h2>
+    <p>If you make great product and want a buyer who understands retail from the ground up, we'd love to connect.</p>
+    <a href="#" onclick="showPage('contact')" class="btn-primary" style="font-size:16px;padding:16px 40px">Get in touch</a>
+  </div>
+
+  <footer>
+    <div class="footer-logo-text"><span class="spark">Spark</span><span class="fish">fish</span></div>
+    <div class="footer-copy">© 2026 Sparkfish Inc. — Lehi, Utah</div>
+    <div class="footer-links">
+      <a href="#" onclick="showPage('home')">Home</a>
+      <a href="#" onclick="showPage('brands')">Our brands</a>
+      <a href="#" onclick="showPage('contact')">Contact</a>
+    </div>
+    <div class="footer-social">
+      <a href="https://www.facebook.com/sparkfishinc" target="_blank">Facebook</a>
+      <a href="https://www.instagram.com/sparkfish_lehi/" target="_blank">Instagram</a>
+    </div>
+  </footer>
+</div>
+
+<!-- ═══ CONTACT ═══ -->
+<div id="page-contact" class="page">
+  <div class="page-hero">
+    <h1>Let's talk</h1>
+    <p>We're always interested in connecting with manufacturers and distributors who make quality products. If you think there's a fit, reach out directly.</p>
+  </div>
+
+  <section>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>Get in touch</h3>
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <div class="contact-label">Address</div>
+            <div class="contact-val">520 S. 850 E., Suite B7<br>Lehi, UT 84043</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div>
+            <div class="contact-label">Phone</div>
+            <div class="contact-val"><a href="tel:3854481120">385-448-1120</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">✉️</div>
+          <div>
+            <div class="contact-label">Email</div>
+            <div class="contact-val"><a href="mailto:customerservice@sparkfishinc.com">customerservice@sparkfishinc.com</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🕐</div>
+          <div>
+            <div class="contact-label">Response time</div>
+            <div class="contact-val">We typically respond within one business day.</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h3 style="font-size:22px;font-weight:600;color:#1a6363;margin-bottom:24px">What to include</h3>
+        <p style="font-size:15px;color:#555;line-height:1.8;margin-bottom:20px">When reaching out about a potential partnership, it helps to include:</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:14px">
+          <li style="display:flex;gap:12px;font-size:15px;color:#555;line-height:1.6"><span style="color:#2BBFBF;font-weight:600">→</span> Your company name and what you manufacture or distribute</li>
+          <li style="display:flex;gap:12px;font-size:15px;color:#555;line-height:1.6"><span style="color:#2BBFBF;font-weight:600">→</span> Which of our verticals your product line fits</li>
+          <li style="display:flex;gap:12px;font-size:15px;color:#555;line-height:1.6"><span style="color:#2BBFBF;font-weight:600">→</span> A brief description of your product catalog</li>
+          <li style="display:flex;gap:12px;font-size:15px;color:#555;line-height:1.6"><span style="color:#2BBFBF;font-weight:600">→</span> Your minimum order quantities and pricing structure</li>
+          <li style="display:flex;gap:12px;font-size:15px;color:#555;line-height:1.6"><span style="color:#2BBFBF;font-weight:600">→</span> The best way and time to reach you</li>
+        </ul>
+        <div style="margin-top:36px;background:#f4fafa;border-radius:12px;padding:28px;border-left:3px solid #2BBFBF">
+          <div style="font-size:14px;font-weight:600;color:#1a6363;margin-bottom:8px">Already a partner?</div>
+          <div style="font-size:14px;color:#666;line-height:1.6">For existing supplier inquiries, purchase order questions, or account support, reach us at the same email or phone number above.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo-text"><span class="spark">Spark</span><span class="fish">fish</span></div>
+    <div class="footer-copy">© 2026 Sparkfish Inc. — Lehi, Utah</div>
+    <div class="footer-links">
+      <a href="#" onclick="showPage('home')">Home</a>
+      <a href="#" onclick="showPage('brands')">Our brands</a>
+      <a href="#" onclick="showPage('about')">About</a>
+    </div>
+    <div class="footer-social">
+      <a href="https://www.facebook.com/sparkfishinc" target="_blank">Facebook</a>
+      <a href="https://www.instagram.com/sparkfish_lehi/" target="_blank">Instagram</a>
+    </div>
+  </footer>
+</div>
+
+<script>
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+const allBrands = ["A-Zoom Snap","Aae","Aberdeen Light","Absolute Outdoors","Abu Garcia","Acco","Accusharp","Accutouch Slider","Aci Bitzenburger","Acr","Acrylic Cutdown","Action Tgt","Active Marine","Active Vhf","Actuant Electrical","Adaptive Tactical","Adult Caliper","Advance Warrior","Adventure Medical","Aerator Pump","Ag Surge","Agm Adder","Agm Global","Aim Sports","Aimcam Hard","Aimshot","Aimtech Adjustable","Albin Group","Alemite","Allegro","Allen","Alpen Apex","Alpen Kodiak","Alpen Shasta","Alpine Bow","Altra","Alum.Rudder/Trim Tab","Alum.Streamlined Collar","Aluminum Anode","Aluminum Divers","Aluminum Hull","Ambi-Dex","American Hunter","American Lock","Ameriglo","Ameristep","Ames","Amk","Ampco Flange","Ampco Safety","Ams Blaze","Ams Bowfishing","Ancor","Android Led","Angled Kayak","Ani-Logics Crush","Ani-Logics Outdoors","Anthony","Apex","Aquacal Autopilot","Aquasol Water","Archery","Arco","Arcticshield","Arizona Archery","Arro","Arrow","Arrowlock Archery","Artic Ice","Asa Electronics","Athlon Cronus","Athlon Midas","Athlon Optics","Atlas","Atlasied","Atn","Atsko","Attwood","Audio Alarm","Audix","Autopilot","Avian X","Avian-X Axp","Avian-X Ergo","Avian-X Magnum","Avian-X Power","Avian-X Powerflight","Avian-X Topflight","Avian-X Ultimate","Axcel","Axion Elevate","B-Stinger Premier","B3 Archery","B3 Coop","B3 Draw","B3 Exact","B3 Exit","B3 Exoskeletal","B3 Hawk","B3 Omega","Badlands","Ballistol Flexclean","Balmar Altmount","Band-It","Banish","Banshee","Barnett","Battery Aa","Battery Switchgrey","Bazxciw Slippery","Bcm","Bcy","Bearkat Magnifier","Beckson","Bee Stinger","Beeman","Beestinger Microhex","Benjamin","Bep Marine","Berry's Manufacturing","Berry's Plastic","Bianchi","Big Game","Big Poppa","Big Shot","Bigshot Pro","Bigshot Real","Bigshot Realwild","Bigtproducts Drop","Bilge Hose","Birchwood","Bit","Bitzenburger","Blackhawk","Blackhawk Stache Iwb","Blackpowder Products","Blakemore","Blazer Vane","Block Kit","Blocker Outdoors","Blue Force","Blue Sea","Boat Leveler","Boating Accessories","Bob-Allen","Bog","Bohning","Boker","Bone Collector","Boots Muck","Borecam","Bosch","Boss Audio","Boston Leather","Bouncer Specklebelly","Bow Jax","Bow Medic","Bow Press","Bowfinger Archery","Bowtree Path","Boyt","Breakfree","Breakthrough Clean","Browning","Bsa Bore","Bsa Optics","Bubba","Buck Bait","Buck Bomb","Buck Fever","Buk Ops","Bulldog","Burris Fullfield","Bushnell","Butler Creek","Byrna","C&G Holsters","C+H Precision","Cajun Arrow","Cajun Bowfishing","Cajun Sucker","Caldwell","Caliber","Camco","Camillus","Campbell","Camshaft Position","Canadian Shield","Carbon Pro","Carter","Casio","Cbe Affect","Cbe Arrow","Cbe Engage","Cbe Trek","Cbe Vertex","Centerpoint Archery","Centerpoint Carbon","Centerpoint Crossbow","Centerpoint Power","Christensen Arms","Civivi Elementum","Clenzoil","Coleman","Collinite","Competition Electronics","Counter Assault","Crimson Trace","Crosman","Cross Canyon","Crossbreed Holsters","Crosstac Diplomat","Crosstac Precision","Cva","Cyclops","Dac","Daisy","Daniel Defense","Dead Center","Dead Down","Dead Ringer","Deadpoint Broadhead","Deadshot Bipod","Delta Mckenzie","Desantis","Dewalt","Diamond Archery","Diana","Dirty","Dnz","Do All","Dogtra","Domain Outdoor","Dometic","Drake Waterfowl","Dremel","Duck Commander","Duracell","Eagle Claw","Easton","Energizer","Eotech","Evolution","Excalibur","Explorer","Ez Aim","Federal","Fenix","Flambeau","Flextone Hunting","Frabill","Frankford Arsenal","Frogg Toggs","Furuno","Galco","Gamo Coyote","Gamo Swarm","Garmin","Garrett Metal","Gearwrench","Geissele","General Tools","Genesis","Gold Tip","Goldenrod","Gpo German","Grabber Body","Grand Wing","Grey Ghost","Grim Reaper","Grovtec","Hamskea Archery","Hatsan Blitz","Hatsan Mod","Hatsan Speedfire","Havalon Hv","Hawk","Hawke Sport","Hawke Vantage","Hha","Hiviz","Hme","Honeywell","Hoppe's","Horn Hunter","Hornady","Howard Leight","Humminbird","Hunter Safety","Hunter Specialties","Huskemaw Blue","Huskemaw Hunting","Huskemaw Tactical","Icom","Indian Creek","Insights Hunting","Jabsco","Jackies Deer","James Valley","Jbl","Jebs","Ka-Bar","Keeper","Kershaw","Keystone Sporting","Killer Instinct","Kimber","Kleenbore","Klymit Double","Klymit Insulated","Knight","Komelon","Konus","Kryptek","Lacrosse","Larue Tactical","Lasermax Gripsense","Latitude Outdoors","Lee","Leupold","Limbsaver","Lockdown","Loctite","Lucas Oil","Lucid","Lyman","Lynch Mob","Mace Brand","Mace Pepper","Maglite","Magnus","Magpul","Makita","Manzella Whitetail","Marksman","Master Lock","Mayville Engineering","Mdt","Mec","Mechanix","Meprolight","Mercury","Midwest Industries","Millennium Treestands","Minn Kota","Mission First","Mojo Decoys","Mojo Outdoors","Montana Decoy","Morrell Targets","Mossberg","Moultrie Feeder","Moultrie Gravity","Mtm","Muck","Muddy","Nanuk","Nap Killzone","Nap Quickfletch","Natrapel","Ncstar","Nebo Davinci","Nebo Luxtreme","Nextorch","Night Fision","Nosler","Oncore Archery","Onyx","Orion Survival","Otis","Outdoor Edge","Outers","Pachmayr","Paradox Products","Permatex","Pflueger","Pine Ridge","Pistol Grip","Plano","Police Security","Primos","Pro Shot","Promag","Ps Products","Pse","Pulsar Axion","Pulsar Thermion","Pyramex","Qad Inc","Quaker Boy","Quality Archery","Radians","Radical Archery","Rapala","Ravin","Raymarine","Rcbs","Real Avid","Reptilia","Rinehart","Ripcord Rest","Riton","Rival Arms","Rivers Edge","Rocket Meat","Rocky Mountain","Ronstan","Sabre","Safariland","Scent Killer","Scentblocker","Scentlok","Scott Archery","Scott Releases","Scotty","Seaguar Abrazx","Seaguar Blue","Seaguar Fluorocarbon","Seekins Precision","Sheffield","Shield Sights","Shoot-N-C","Shooter's Choice","Sig Sauer","Sierra","Simmons Pro","Sims Vibration","Skb Cases","Skull Hooker","Slick Trick","Smith","Snapsafe Premium","Snapsafe Steel","Sog Flash","Sol Survival","Southern Grind","Spyderco","Spot Hogg","Sports Afield","Springfield","Star Brite","Stealth Cam","Steiner","Streamlight","Strike Industries","Summit Treestands","Swagger","Swhacker","Tactacam Reveal","Talley","Techna Clip","Tekmat","Templar Knife","Tenzing","Tethrd Predator","Tetra Gun","Tightspot Quiver","Tipton","Trijicon","Trophy Ridge","Trophy Treestands","Tru-Ball","Truglo","Under-Armour Mens","Uniden","Utg","Versacarry","Vertx","Vexilar","Victory Archery","Viridian","Vortex","W.R. Case","Walker's Game","Walker's Razor","Walker's Silencer","Warne","Wasp Archery","Weaver","Wheeler","Whetstone Cutlery","Whitetail Institute","Wildgame Innovations","Wildlife Research","Williams","Winchester","Woodhaven Calls","Woodhaven Custom","Woodhaven Equalizer","Xantrex","X-Vision Optics","Yakima Bait","Zippo","Zoom","Zwickey Black","Zwickey Kondor"];
+
+const letters = [...new Set(allBrands.map(b => b[0].toUpperCase()))].sort();
+
+function buildAZNav(activeLetter){
+  const nav = document.getElementById('az-nav');
+  nav.innerHTML = letters.map(l => `<a href="#" onclick="scrollToLetter('${l}');return false;" style="display:inline-block;width:36px;height:36px;line-height:36px;text-align:center;border-radius:6px;font-size:14px;font-weight:500;border:0.5px solid rgba(43,191,191,0.35);color:${activeLetter===l?'#fff':'#1a6363'};background:${activeLetter===l?'#2BBFBF':'transparent'};transition:all 0.15s">${l}</a>`).join('');
+}
+
+function buildFullList(brands){
+  const list = document.getElementById('brand-list');
+  const grouped = {};
+  brands.forEach(b => {
+    const l = b[0].toUpperCase();
+    if(!grouped[l]) grouped[l] = [];
+    grouped[l].push(b);
+  });
+  list.innerHTML = Object.keys(grouped).sort().map(l => `
+    <div id="letter-${l}" style="margin-bottom:40px">
+      <div style="font-size:28px;font-weight:700;color:#2BBFBF;border-bottom:2px solid #e1f5f5;padding-bottom:10px;margin-bottom:20px">${l}</div>
+      <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px">
+        ${grouped[l].map(b=>`<div style="background:#f9fdfd;border:0.5px solid rgba(43,191,191,0.2);border-radius:8px;padding:10px 14px;font-size:13px;color:#333;font-weight:400">${b}</div>`).join('')}
+      </div>
+    </div>`).join('');
+  document.getElementById('search-count').textContent = `Showing ${brands.length} brands`;
+}
+
+function filterBrands(){
+  const q = document.getElementById('brand-search').value.toLowerCase();
+  const filtered = q ? allBrands.filter(b => b.toLowerCase().includes(q)) : allBrands;
+  document.getElementById('az-nav').style.display = q ? 'none' : 'flex';
+  buildFullList(filtered);
+}
+
+function scrollToLetter(l){
+  buildAZNav(l);
+  const el = document.getElementById('letter-'+l);
+  if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+buildAZNav('');
+buildFullList(allBrands);
+</script>
+</body>
+</html>
