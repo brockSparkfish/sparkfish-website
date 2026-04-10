@@ -110,18 +110,60 @@ footer{background:#0d4a4a;padding:40px 60px;display:flex;align-items:center;just
 
 .page{display:none}
 .page.active{display:block}
+
+@media(max-width:768px){
+  nav{padding:14px 20px;position:relative}
+  .logo-text{font-size:20px}
+  .nav-links{display:none}
+  .nav-links.open{display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:#fff;border-bottom:1px solid rgba(43,191,191,0.2);padding:16px 20px;gap:16px;z-index:200}
+  .nav-links.open a{font-size:15px}
+  .hamburger{display:flex;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+  .hamburger span{display:block;width:24px;height:2px;background:#333;border-radius:2px}
+  .hero{flex-direction:column;padding:48px 20px;gap:28px}
+  .hero-bg{display:none!important}
+  .hero h1{font-size:34px}
+  .hero-sub{font-size:15px}
+  .hero-card{width:100%}
+  .hero-btns{flex-wrap:wrap}
+  .stat-grid{gap:20px}
+  section{padding:48px 20px}
+  .section-h2{font-size:26px}
+  .brands-grid{grid-template-columns:1fr 1fr;gap:12px}
+  .brand-card{padding:18px 14px;border:1.5px solid rgba(43,191,191,0.6)}
+  .brand-name{font-size:14px}
+  .brand-desc{font-size:12px}
+  .why-grid{grid-template-columns:1fr;gap:16px}
+  .why-card{padding:20px}
+  .facility-section{flex-direction:column}
+  .facility-img{flex:none;width:100%;height:220px}
+  .brand-detail-grid{grid-template-columns:1fr}
+  .about-grid{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr;gap:40px}
+  .values-grid{grid-template-columns:1fr}
+  .cta-banner{padding:52px 20px;width:100%}
+  .cta-banner h2{font-size:26px}
+  .page-hero{padding:48px 20px}
+  .page-hero h1{font-size:28px}
+  .page-hero p{font-size:15px}
+  footer{flex-direction:column;align-items:flex-start;padding:28px 20px;gap:14px;width:100%}
+  .footer-links{flex-wrap:wrap;gap:12px}
+  .section-sub{margin-bottom:32px}
+}
 </style>
 </head>
 <body>
 
 <nav>
   <div class="logo-text" onclick="showPage('home')"><span class="spark">Spark</span><span class="fish">fish</span></div>
-  <div class="nav-links">
-    <a href="#" onclick="showPage('home')">Home</a>
-    <a href="#" onclick="showPage('brands')">Our brands</a>
-    <a href="#" onclick="showPage('whatwesell')">What we sell</a>
-    <a href="#" onclick="showPage('about')">About</a>
-    <a href="#" onclick="showPage('contact')" class="nav-cta">Work with us</a>
+  <div class="nav-links" id="nav-links">
+    <a href="#" onclick="showPage('home');closeNav()">Home</a>
+    <a href="#" onclick="showPage('brands');closeNav()">Our brands</a>
+    <a href="#" onclick="showPage('whatwesell');closeNav()">What we sell</a>
+    <a href="#" onclick="showPage('about');closeNav()">About</a>
+    <a href="#" onclick="showPage('contact');closeNav()" class="nav-cta">Work with us</a>
+  </div>
+  <div class="hamburger" id="hamburger" onclick="toggleNav()" style="display:none">
+    <span></span><span></span><span></span>
   </div>
 </nav>
 
@@ -556,6 +598,18 @@ function showPage(id){
   document.getElementById('page-'+id).classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
 }
+function toggleNav(){
+  document.getElementById('nav-links').classList.toggle('open');
+}
+function closeNav(){
+  document.getElementById('nav-links').classList.remove('open');
+}
+function checkMobile(){
+  const h=document.getElementById('hamburger');
+  if(window.innerWidth<=768){h.style.display='flex'}else{h.style.display='none';document.getElementById('nav-links').classList.remove('open')}
+}
+window.addEventListener('resize',checkMobile);
+checkMobile();
 
 const allBrands = ["A-Zoom Snap","Aae","Aberdeen Light","Absolute Outdoors","Abu Garcia","Acco","Accusharp","Accutouch Slider","Aci Bitzenburger","Acr","Acrylic Cutdown","Action Tgt","Active Marine","Active Vhf","Actuant Electrical","Adaptive Tactical","Adult Caliper","Advance Warrior","Adventure Medical","Aerator Pump","Ag Surge","Agm Adder","Agm Global","Aim Sports","Aimcam Hard","Aimshot","Aimtech Adjustable","Albin Group","Alemite","Allegro","Allen","Alpen Apex","Alpen Kodiak","Alpen Shasta","Alpine Bow","Altra","Alum.Rudder/Trim Tab","Alum.Streamlined Collar","Aluminum Anode","Aluminum Divers","Aluminum Hull","Ambi-Dex","American Hunter","American Lock","Ameriglo","Ameristep","Ames","Amk","Ampco Flange","Ampco Safety","Ams Blaze","Ams Bowfishing","Ancor","Android Led","Angled Kayak","Ani-Logics Crush","Ani-Logics Outdoors","Anthony","Apex","Aquacal Autopilot","Aquasol Water","Archery","Arco","Arcticshield","Arizona Archery","Arro","Arrow","Arrowlock Archery","Artic Ice","Asa Electronics","Athlon Cronus","Athlon Midas","Athlon Optics","Atlas","Atlasied","Atn","Atsko","Attwood","Audio Alarm","Audix","Autopilot","Avian X","Avian-X Axp","Avian-X Ergo","Avian-X Magnum","Avian-X Power","Avian-X Powerflight","Avian-X Topflight","Avian-X Ultimate","Axcel","Axion Elevate","B-Stinger Premier","B3 Archery","B3 Coop","B3 Draw","B3 Exact","B3 Exit","B3 Exoskeletal","B3 Hawk","B3 Omega","Badlands","Ballistol Flexclean","Balmar Altmount","Band-It","Banish","Banshee","Barnett","Battery Aa","Battery Switchgrey","Bazxciw Slippery","Bcm","Bcy","Bearkat Magnifier","Beckson","Bee Stinger","Beeman","Beestinger Microhex","Benjamin","Bep Marine","Berry's Manufacturing","Berry's Plastic","Bianchi","Big Game","Big Poppa","Big Shot","Bigshot Pro","Bigshot Real","Bigshot Realwild","Bigtproducts Drop","Bilge Hose","Birchwood","Bit","Bitzenburger","Blackhawk","Blackhawk Stache Iwb","Blackpowder Products","Blakemore","Blazer Vane","Block Kit","Blocker Outdoors","Blue Force","Blue Sea","Boat Leveler","Boating Accessories","Bob-Allen","Bog","Bohning","Boker","Bone Collector","Boots Muck","Borecam","Bosch","Boss Audio","Boston Leather","Bouncer Specklebelly","Bow Jax","Bow Medic","Bow Press","Bowfinger Archery","Bowtree Path","Boyt","Breakfree","Breakthrough Clean","Browning","Bsa Bore","Bsa Optics","Bubba","Buck Bait","Buck Bomb","Buck Fever","Buk Ops","Bulldog","Burris Fullfield","Bushnell","Butler Creek","Byrna","C&G Holsters","C+H Precision","Cajun Arrow","Cajun Bowfishing","Cajun Sucker","Caldwell","Caliber","Camco","Camillus","Campbell","Camshaft Position","Canadian Shield","Carbon Pro","Carter","Casio","Cbe Affect","Cbe Arrow","Cbe Engage","Cbe Trek","Cbe Vertex","Centerpoint Archery","Centerpoint Carbon","Centerpoint Crossbow","Centerpoint Power","Christensen Arms","Civivi Elementum","Clenzoil","Coleman","Collinite","Competition Electronics","Counter Assault","Crimson Trace","Crosman","Cross Canyon","Crossbreed Holsters","Crosstac Diplomat","Crosstac Precision","Cva","Cyclops","Dac","Daisy","Daniel Defense","Dead Center","Dead Down","Dead Ringer","Deadpoint Broadhead","Deadshot Bipod","Delta Mckenzie","Desantis","Dewalt","Diamond Archery","Diana","Dirty","Dnz","Do All","Dogtra","Domain Outdoor","Dometic","Drake Waterfowl","Dremel","Duck Commander","Duracell","Eagle Claw","Easton","Energizer","Eotech","Evolution","Excalibur","Explorer","Ez Aim","Federal","Fenix","Flambeau","Flextone Hunting","Frabill","Frankford Arsenal","Frogg Toggs","Furuno","Galco","Gamo Coyote","Gamo Swarm","Garmin","Garrett Metal","Gearwrench","Geissele","General Tools","Genesis","Gold Tip","Goldenrod","Gpo German","Grabber Body","Grand Wing","Grey Ghost","Grim Reaper","Grovtec","Hamskea Archery","Hatsan Blitz","Hatsan Mod","Hatsan Speedfire","Havalon Hv","Hawk","Hawke Sport","Hawke Vantage","Hha","Hiviz","Hme","Honeywell","Hoppe's","Horn Hunter","Hornady","Howard Leight","Humminbird","Hunter Safety","Hunter Specialties","Huskemaw Blue","Huskemaw Hunting","Huskemaw Tactical","Icom","Indian Creek","Insights Hunting","Jabsco","Jackies Deer","James Valley","Jbl","Jebs","Ka-Bar","Keeper","Kershaw","Keystone Sporting","Killer Instinct","Kimber","Kleenbore","Klymit Double","Klymit Insulated","Knight","Komelon","Konus","Kryptek","Lacrosse","Larue Tactical","Lasermax Gripsense","Latitude Outdoors","Lee","Leupold","Limbsaver","Lockdown","Loctite","Lucas Oil","Lucid","Lyman","Lynch Mob","Mace Brand","Mace Pepper","Maglite","Magnus","Magpul","Makita","Manzella Whitetail","Marksman","Master Lock","Mayville Engineering","Mdt","Mec","Mechanix","Meprolight","Mercury","Midwest Industries","Millennium Treestands","Minn Kota","Mission First","Mojo Decoys","Mojo Outdoors","Montana Decoy","Morrell Targets","Mossberg","Moultrie Feeder","Moultrie Gravity","Mtm","Muck","Muddy","Nanuk","Nap Killzone","Nap Quickfletch","Natrapel","Ncstar","Nebo Davinci","Nebo Luxtreme","Nextorch","Night Fision","Nosler","Oncore Archery","Onyx","Orion Survival","Otis","Outdoor Edge","Outers","Pachmayr","Paradox Products","Permatex","Pflueger","Pine Ridge","Pistol Grip","Plano","Police Security","Primos","Pro Shot","Promag","Ps Products","Pse","Pulsar Axion","Pulsar Thermion","Pyramex","Qad Inc","Quaker Boy","Quality Archery","Radians","Radical Archery","Rapala","Ravin","Raymarine","Rcbs","Real Avid","Reptilia","Rinehart","Ripcord Rest","Riton","Rival Arms","Rivers Edge","Rocket Meat","Rocky Mountain","Ronstan","Sabre","Safariland","Scent Killer","Scentblocker","Scentlok","Scott Archery","Scott Releases","Scotty","Seaguar Abrazx","Seaguar Blue","Seaguar Fluorocarbon","Seekins Precision","Sheffield","Shield Sights","Shoot-N-C","Shooter's Choice","Sig Sauer","Sierra","Simmons Pro","Sims Vibration","Skb Cases","Skull Hooker","Slick Trick","Smith","Snapsafe Premium","Snapsafe Steel","Sog Flash","Sol Survival","Southern Grind","Spyderco","Spot Hogg","Sports Afield","Springfield","Star Brite","Stealth Cam","Steiner","Streamlight","Strike Industries","Summit Treestands","Swagger","Swhacker","Tactacam Reveal","Talley","Techna Clip","Tekmat","Templar Knife","Tenzing","Tethrd Predator","Tetra Gun","Tightspot Quiver","Tipton","Trijicon","Trophy Ridge","Trophy Treestands","Tru-Ball","Truglo","Under-Armour Mens","Uniden","Utg","Versacarry","Vertx","Vexilar","Victory Archery","Viridian","Vortex","W.R. Case","Walker's Game","Walker's Razor","Walker's Silencer","Warne","Wasp Archery","Weaver","Wheeler","Whetstone Cutlery","Whitetail Institute","Wildgame Innovations","Wildlife Research","Williams","Winchester","Woodhaven Calls","Woodhaven Custom","Woodhaven Equalizer","Xantrex","X-Vision Optics","Yakima Bait","Zippo","Zoom","Zwickey Black","Zwickey Kondor"];
 
